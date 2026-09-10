@@ -10,13 +10,12 @@ def move_file(command: str) -> None:
     if parts[0] != "mv":
         return
 
-    file_name = parts[1]
-    dir_file_name = parts[2]
+    _, file_name, dir_file_name = parts
 
     directory = os.path.dirname(dir_file_name)
 
     if dir_file_name[-1] == "/":
-        dir_file_name += file_name
+        dir_file_name = os.path.join(dir_file_name, file_name)
 
     if directory:
         os.makedirs(directory, exist_ok=True)
